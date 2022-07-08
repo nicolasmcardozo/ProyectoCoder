@@ -2,6 +2,9 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from AppCoder.forms import CursoFormulario,ProfesorFormulario, EstudianteFormulario, EntregableFormulario
 from AppCoder.models import Curso, Profesor, Estudiante, Entregable
+from django.views.generic import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView,UpdateView,DeleteView
 
 def saludo(request):   #Nuestra primera vista :) 
 	return HttpResponse("Hola Djangooo - Coder")
@@ -193,16 +196,33 @@ def entregables(request):
 	return render(request,"AppCoder/entregables.html",{"miFormulario":miFormulario})
 
 
+class ProfesorList(ListView):
+	
+	model = Profesor
+	template_name = "AppCoder/profesores_list.html"
+
+class ProfesorDetalle(DetailView):
+
+	model = Profesor
+	template_name = "AppCoder/profesor_detalle.html"
+
+class ProfesorCreacion(CreateView):
+
+	model = Profesor
+	success_url = "/AppCoder/profesor/list"
+	fields= ['nombre','apellido','emails','profesion']
 
 
+class ProfesorDelete(DeleteView):
 
+	model = Profesor
+	success_url = "/AppCoder/profesor/list"
 
+class ProfesorUpdate(UpdateView):
 
-
-
-
-
-
+    model = Profesor
+    success_url = "/AppCoder/profesor/list"
+    fields= ['nombre','apellido','emails','profesion']
 
 
 	
