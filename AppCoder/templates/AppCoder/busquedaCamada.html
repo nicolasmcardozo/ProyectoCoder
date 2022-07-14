@@ -1,6 +1,18 @@
-<form action="/AppCoder/buscar/" method="GET">
+{% extends "AppCoder/padre.html" %}
 
-    <input type="number" name="camada" id="camada">
-    <input type="submit" value="buscar">
+{% load static %}
 
-</form>
+{% block contenidoQueCambia %}
+
+   <h3>Ingrese número de camada</h3>
+
+   <form action="/AppCoder/buscar/" method="GET">
+
+       <input type="number" name="camada" id="camada">
+       <input type="submit" value="buscar">
+
+   </form>
+
+
+
+{% endblock %}

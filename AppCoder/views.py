@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from AppCoder.forms import CursoFormulario,ProfesorFormulario, EstudianteFormulario, EntregableFormulario, UserRegisterForm
+from AppCoder.forms import CursoFormulario,ProfesorFormulario, EstudianteFormulario, EntregableFormulario, UserRegisterForm, UserEditForm
 from AppCoder.models import Curso, Profesor, Estudiante, Entregable
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
@@ -271,3 +271,35 @@ def register(request):
 	else:
 		form = UserRegisterForm()
 	return render(request,"AppCoder/registro.html",{"form":form})
+
+@login_required
+def editarPerfil(request):
+
+      #Instancia del login
+      usuario = request.user
+     
+      #Si es metodo POST hago lo mismo que el agregar
+      if request.method == 'POST':
+            miFormulario = UserEditForm(request.POST) 
+            if miFormulario.is_valid():   #Si pasó la validación de Django
+
+                  informacion = miFormulario.cleaned_data
+            
+                  #Datos que se modificarán
+                  usuario.email = informacion['email']
+                  usuario.password1 = informacion['password1']
+                  usuario.password2 = informacion['password2']
+                  usuario.save()
+
+                  return render(request, "AppCoder/inicio.html") #Vuelvo al inicio o a donde quieran
+      #En caso que no sea post
+      else: 
+            #Creo el formulario con los datos que voy a modificar
+            miFormulario= UserEditForm(initial={ 'email':usuario.email}) 
+
+      #Voy al html que me permite editar
+      return render(request, "AppCoder/editarPerfil.html", {"miFormulario":miFormulario, "usuario":usuario})
+
+
+
+
