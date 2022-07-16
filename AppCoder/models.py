@@ -27,6 +27,9 @@ class Entregable(models.Model):
     fechaDeEntrega = models.DateField()
     entregado = models.BooleanField()
 
+class Avatar(models.Model):  
 
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
+    imagen = models.ImageField(upload_to='avatares',null=True,blank=True)
 
 

@@ -1,7 +1,7 @@
 # ProyectoCoder
 Consignas:
 
-1. Herencia de HTML.
+1. Herencia de HTML. Prueeba
 2. Por lo menos 3 clases en models.
 3. Un formulario para insertar datos a todas las clases de tu models.
 4. Un formulario para buscar algo en la BD

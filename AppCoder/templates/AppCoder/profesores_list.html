@@ -7,6 +7,11 @@
     <title>Profesores_list</title>
 </head>
 <body>
+    {% extends "AppCoder/padre.html" %}
+
+    {% load static %}
+
+    {% block contenidoQueCambia %}
     <h1>Profesores:</h1>
     <ul>
         {% for profesores in object_list %}
@@ -20,5 +25,6 @@
             </li>
         {% endfor %}
     </ul>
+    {% endblock %}
 </body>
 </html>
